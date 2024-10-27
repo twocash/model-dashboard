@@ -109,7 +109,7 @@ const ModelDashboard = () => {
       </CardHeader>
       <CardContent>
         <div className="flex flex-row justify-between gap-16">
-          {/* Left Column - Sliders */}
+          {/* Left Column - Sliders and Total */}
           <div className="w-1/4 flex flex-col space-y-8 pt-8">
             <div>
               <label htmlFor="tier1" className="block text-sm font-medium mb-1">
@@ -161,6 +161,14 @@ const ModelDashboard = () => {
                 })}
                 className="w-full accent-[#E35F00]"
               />
+            </div>
+
+            {/* Total BHN Share */}
+            <div className="mt-8 pt-4 border-t border-[#E35F00]">
+              <div className="text-lg font-medium">Total BHN Share</div>
+              <div className="text-3xl font-bold text-[#E35F00]">
+                {formatCurrency(calculateMetrics().reduce((sum, item) => sum + item.bhnShare, 0))}
+              </div>
             </div>
           </div>
 
