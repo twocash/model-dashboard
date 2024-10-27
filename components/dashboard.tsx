@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 const Chart = dynamic(() => import('./chart'), {
   ssr: false,
-  loading: () => <div className="h-[400px] w-full flex items-center justify-center">Loading chart...</div>
+  loading: () => <div className="h-[500px] w-full flex items-center justify-center">Loading chart...</div>
 });
 
 interface Metrics {
@@ -103,14 +103,14 @@ const ModelDashboard = () => {
   };
 
   return (
-    <Card className="w-[1200px] bg-black text-white border-none shadow-none p-6">
+    <Card className="min-w-[1400px] bg-black text-white border-none shadow-none p-6">
       <CardHeader>
         <CardTitle className="text-2xl">Business Model Metrics</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-row gap-12">
+        <div className="flex flex-row justify-between gap-16">
           {/* Left Column - Sliders */}
-          <div className="w-1/3 flex flex-col space-y-6">
+          <div className="w-1/4 flex flex-col space-y-8 pt-8">
             <div>
               <label htmlFor="tier1" className="block text-sm font-medium mb-1">
                 Tier 1 Accounts (0-10): {accountParams.tier1}
@@ -165,8 +165,8 @@ const ModelDashboard = () => {
           </div>
 
           {/* Right Column - Chart */}
-          <div className="w-2/3">
-            <Suspense fallback={<div className="h-[400px] w-full flex items-center justify-center">Loading chart...</div>}>
+          <div className="w-3/4">
+            <Suspense fallback={<div className="h-[500px] w-full flex items-center justify-center">Loading chart...</div>}>
               <Chart data={calculateMetrics()} formatCurrency={formatCurrency} />
             </Suspense>
           </div>

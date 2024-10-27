@@ -14,11 +14,11 @@ const Chart = ({ data, formatCurrency }: ChartProps) => {
   return (
     <div className="h-[400px] w-full">
       <BarChart
-        width={600}
-        height={400}
-        data={data}
-        margin={{ top: 20, right: 30, left: 60, bottom: 5 }}
-      >
+  width={800}  // Increased from 600
+  height={500} // Increased from 400
+  data={data}
+  margin={{ top: 20, right: 30, left: 60, bottom: 5 }}
+>
         <XAxis 
           dataKey="name" 
           stroke="#FFFFFF"
