@@ -103,9 +103,11 @@ const ModelDashboard = () => {
 
   return (
     <div className="w-full bg-black text-white p-8">
-      <h1 className="text-2xl font-bold mb-8">Business Model Metrics</h1>
+      <h1 className="text-2xl font-bold mb-8">
+        BHN Revenue Share: {formatCurrency(calculateMetrics().reduce((sum, item) => sum + item.bhnShare, 0))}
+      </h1>
       <div className="grid grid-cols-12 gap-8">
-        {/* Left Column - Sliders and Total */}
+        {/* Left Column - Sliders */}
         <div className="col-span-4 space-y-8">
           <div>
             <label htmlFor="tier1" className="block text-sm font-medium mb-1">
@@ -157,14 +159,6 @@ const ModelDashboard = () => {
               })}
               className="w-full accent-[#E35F00]"
             />
-          </div>
-
-          {/* Total BHN Share */}
-          <div className="mt-8 pt-4 border-t border-[#E35F00]">
-            <div className="text-lg font-medium">Total BHN Share</div>
-            <div className="text-3xl font-bold text-[#E35F00]">
-              {formatCurrency(calculateMetrics().reduce((sum, item) => sum + item.bhnShare, 0))}
-            </div>
           </div>
         </div>
 
