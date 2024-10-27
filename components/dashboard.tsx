@@ -103,68 +103,68 @@ const ModelDashboard = () => {
   };
 
   return (
-    <Card className="w-full max-w-7xl bg-black text-white border-none shadow-none">
+    <Card className="w-[1200px] bg-black text-white border-none shadow-none p-6">
       <CardHeader>
         <CardTitle className="text-2xl">Business Model Metrics</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-row gap-8">
-          <div className="w-1/3 space-y-6">
-            <div className="flex flex-col gap-4">
-              <div>
-                <label htmlFor="tier1" className="block text-sm font-medium mb-1">
-                  Tier 1 Accounts (0-10): {accountParams.tier1}
-                </label>
-                <input
-                  type="range"
-                  id="tier1"
-                  min="0"
-                  max="10"
-                  value={accountParams.tier1}
-                  onChange={(e) => setAccountParams({
-                    ...accountParams,
-                    tier1: parseInt(e.target.value)
-                  })}
-                  className="w-full accent-[#E35F00]"
-                />
-              </div>
-              <div>
-                <label htmlFor="tier2" className="block text-sm font-medium mb-1">
-                  Tier 2 Accounts (0-50): {accountParams.tier2}
-                </label>
-                <input
-                  type="range"
-                  id="tier2"
-                  min="0"
-                  max="50"
-                  value={accountParams.tier2}
-                  onChange={(e) => setAccountParams({
-                    ...accountParams,
-                    tier2: parseInt(e.target.value)
-                  })}
-                  className="w-full accent-[#E35F00]"
-                />
-              </div>
-              <div>
-                <label htmlFor="tier3" className="block text-sm font-medium mb-1">
-                  Tier 3 Accounts (0-100): {accountParams.tier3}
-                </label>
-                <input
-                  type="range"
-                  id="tier3"
-                  min="0"
-                  max="100"
-                  value={accountParams.tier3}
-                  onChange={(e) => setAccountParams({
-                    ...accountParams,
-                    tier3: parseInt(e.target.value)
-                  })}
-                  className="w-full accent-[#E35F00]"
-                />
-              </div>
+        <div className="flex flex-row gap-12">
+          {/* Left Column - Sliders */}
+          <div className="w-1/3 flex flex-col space-y-6">
+            <div>
+              <label htmlFor="tier1" className="block text-sm font-medium mb-1">
+                Tier 1 Accounts (0-10): {accountParams.tier1}
+              </label>
+              <input
+                type="range"
+                id="tier1"
+                min="0"
+                max="10"
+                value={accountParams.tier1}
+                onChange={(e) => setAccountParams({
+                  ...accountParams,
+                  tier1: parseInt(e.target.value)
+                })}
+                className="w-full accent-[#E35F00]"
+              />
+            </div>
+            <div>
+              <label htmlFor="tier2" className="block text-sm font-medium mb-1">
+                Tier 2 Accounts (0-50): {accountParams.tier2}
+              </label>
+              <input
+                type="range"
+                id="tier2"
+                min="0"
+                max="50"
+                value={accountParams.tier2}
+                onChange={(e) => setAccountParams({
+                  ...accountParams,
+                  tier2: parseInt(e.target.value)
+                })}
+                className="w-full accent-[#E35F00]"
+              />
+            </div>
+            <div>
+              <label htmlFor="tier3" className="block text-sm font-medium mb-1">
+                Tier 3 Accounts (0-100): {accountParams.tier3}
+              </label>
+              <input
+                type="range"
+                id="tier3"
+                min="0"
+                max="100"
+                value={accountParams.tier3}
+                onChange={(e) => setAccountParams({
+                  ...accountParams,
+                  tier3: parseInt(e.target.value)
+                })}
+                className="w-full accent-[#E35F00]"
+              />
             </div>
           </div>
-          
+
+          {/* Right Column - Chart */}
           <div className="w-2/3">
             <Suspense fallback={<div className="h-[400px] w-full flex items-center justify-center">Loading chart...</div>}>
               <Chart data={calculateMetrics()} formatCurrency={formatCurrency} />
