@@ -8,10 +8,99 @@ const Chart = dynamic(() => import('./chart'), {
   loading: () => <div className="h-[400px] w-full flex items-center justify-center">Loading chart...</div>
 });
 
-// ... keep all the interfaces and other code ...
+interface Metrics {
+  targetedCustomers: number;
+  servedCustomers: number;
+  annualImpressions: number;
+  offerActivations: number;
+  salesGenerated: number;
+  grossRevenue: number;
+}
+
+interface MetricsRecord {
+  [key: string]: number;
+}
+
+interface BaseMetrics {
+  tier1: Metrics;
+  tier2: Metrics;
+  tier3: Metrics;
+}
 
 const ModelDashboard = () => {
-  // ... keep all the state and calculation code ...
+  const [accountParams, setAccountParams] = useState({
+    tier1: 3,
+    tier2: 10,
+    tier3: 20
+  });
+  
+  const [bhnShare] = useState(0.5); // 50% revenue share
+
+  const baseMetrics: BaseMetrics = {
+    tier1: {
+      targetedCustomers: 50000000,
+      servedCustomers: 42000000,
+      annualImpressions: 1200000000,
+      offerActivations: 7800000,
+      salesGenerated: 130000000,
+      grossRevenue: 3100000
+    },
+    tier2: {
+      targetedCustomers: 50000000,
+      servedCustomers: 40000000,
+      annualImpressions: 900000000,
+      offerActivations: 5700000,
+      salesGenerated: 100000000,
+      grossRevenue: 1900000
+    },
+    tier3: {
+      targetedCustomers: 50000000,
+      servedCustomers: 36000000,
+      annualImpressions: 650000000,
+      offerActivations: 4100000,
+      salesGenerated: 175000000,
+      grossRevenue: 1400000
+    }
+  };
+
+  const calculateMetrics = () => {
+    const tier1Metrics = Object.entries(baseMetrics.tier1).reduce<MetricsRecord>((acc, [key, value]) => {
+      acc[key] = value * accountParams.tier1;
+      return acc;
+    }, {});
+    
+    const tier2Metrics = Object.entries(baseMetrics.tier2).reduce<MetricsRecord>((acc, [key, value]) => {
+      acc[key] = value * accountParams.tier2;
+      return acc;
+    }, {});
+    
+    const tier3Metrics = Object.entries(baseMetrics.tier3).reduce<MetricsRecord>((acc, [key, value]) => {
+      acc[key] = value * accountParams.tier3;
+      return acc;
+    }, {});
+
+    return [
+      {
+        name: 'Tier 1',
+        accounts: accountParams.tier1,
+        bhnShare: tier1Metrics.grossRevenue * bhnShare,
+      },
+      {
+        name: 'Tier 2',
+        accounts: accountParams.tier2,
+        bhnShare: tier2Metrics.grossRevenue * bhnShare,
+      },
+      {
+        name: 'Tier 3',
+        accounts: accountParams.tier3,
+        bhnShare: tier3Metrics.grossRevenue * bhnShare,
+      }
+    ];
+  };
+
+  const formatCurrency = (value: number) => {
+    return `$${value.toLocaleString()}`;
+  };
 
   return (
     <Card className="w-full max-w-7xl bg-black text-white border-none shadow-none">
