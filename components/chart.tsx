@@ -2,12 +2,16 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList } from 'recharts';
 
 interface ChartProps {
-  data: any[];
+  data: Array<{
+    name: string;
+    accounts: number;
+    bhnShare: number;
+  }>;
   formatCurrency: (value: number) => string;
 }
 
 const Chart = ({ data, formatCurrency }: ChartProps) => {
- return (
+  return (
     <div className="h-[400px] w-full">
       <BarChart
         width={600}
@@ -15,10 +19,15 @@ const Chart = ({ data, formatCurrency }: ChartProps) => {
         data={data}
         margin={{ top: 20, right: 30, left: 60, bottom: 5 }}
       >
-        <XAxis dataKey="name" stroke="#FFFFFF" />
+        <XAxis 
+          dataKey="name" 
+          stroke="#FFFFFF"
+          tick={{ fill: '#FFFFFF' }}
+        />
         <YAxis 
           tickFormatter={formatCurrency}
           stroke="#FFFFFF"
+          tick={{ fill: '#FFFFFF' }}
           label={{ 
             value: "Revenue (USD)", 
             angle: -90, 
@@ -29,11 +38,21 @@ const Chart = ({ data, formatCurrency }: ChartProps) => {
         />
         <Tooltip 
           formatter={formatCurrency}
-          contentStyle={{ backgroundColor: '#000000', border: '1px solid #E35F00' }}
+          contentStyle={{ 
+            backgroundColor: '#000000', 
+            border: '1px solid #E35F00',
+            color: '#FFFFFF'
+          }}
           labelStyle={{ color: '#FFFFFF' }}
         />
-        <Legend wrapperStyle={{ color: '#FFFFFF' }} />
-        <Bar dataKey="bhnShare" fill="#E35F00" name="BHN Share">
+        <Legend 
+          wrapperStyle={{ color: '#FFFFFF' }}
+        />
+        <Bar 
+          dataKey="bhnShare" 
+          fill="#E35F00" 
+          name="BHN Share"
+        >
           <LabelList 
             dataKey="bhnShare" 
             position="top" 
@@ -43,7 +62,7 @@ const Chart = ({ data, formatCurrency }: ChartProps) => {
         </Bar>
       </BarChart>
     </div>
-);
+  );
 };
 
 export default Chart;
