@@ -12,13 +12,14 @@ interface ChartProps {
 
 const Chart = ({ data, formatCurrency }: ChartProps) => {
   return (
-    <div className="h-[500px] w-full">
-      <BarChart
-  width={1000}
-  height={600}
-  data={data}
-  margin={{ top: 20, right: 30, left: 60, bottom: 5 }}
->
+  // In chart.tsx, update the BarChart dimensions
+<div className="w-full h-full">
+  <BarChart
+    width={800}
+    height={600}
+    data={data}
+    margin={{ top: 20, right: 30, left: 60, bottom: 5 }}
+  >
         <XAxis 
           dataKey="name" 
           stroke="#FFFFFF"
