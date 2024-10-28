@@ -102,21 +102,19 @@ const ModelDashboard = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <h1 className="text-4xl font-bold text-white py-8">
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '32px', backgroundColor: 'black', color: 'white' }}>
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '32px' }}>
         BHN Revenue Share: {formatCurrency(calculateMetrics().reduce((sum, item) => sum + item.bhnShare, 0))}
       </h1>
-      <div className="flex flex-row gap-16">
-        {/* Left Column - Sliders */}
-        <div className="flex-none w-80">
-          <div className="space-y-8">
+      <div style={{ display: 'flex', gap: '64px' }}>
+        <div style={{ width: '300px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
             <div>
-              <label htmlFor="tier1" className="block text-sm font-medium text-white mb-1">
+              <label style={{ display: 'block', marginBottom: '8px' }}>
                 Tier 1 Accounts (0-10): {accountParams.tier1}
               </label>
               <input
                 type="range"
-                id="tier1"
                 min="0"
                 max="10"
                 value={accountParams.tier1}
@@ -124,16 +122,15 @@ const ModelDashboard = () => {
                   ...accountParams,
                   tier1: parseInt(e.target.value)
                 })}
-                className="w-full accent-[#E35F00]"
+                style={{ width: '100%', accentColor: '#E35F00' }}
               />
             </div>
             <div>
-              <label htmlFor="tier2" className="block text-sm font-medium text-white mb-1">
+              <label style={{ display: 'block', marginBottom: '8px' }}>
                 Tier 2 Accounts (0-50): {accountParams.tier2}
               </label>
               <input
                 type="range"
-                id="tier2"
                 min="0"
                 max="50"
                 value={accountParams.tier2}
@@ -141,16 +138,15 @@ const ModelDashboard = () => {
                   ...accountParams,
                   tier2: parseInt(e.target.value)
                 })}
-                className="w-full accent-[#E35F00]"
+                style={{ width: '100%', accentColor: '#E35F00' }}
               />
             </div>
             <div>
-              <label htmlFor="tier3" className="block text-sm font-medium text-white mb-1">
+              <label style={{ display: 'block', marginBottom: '8px' }}>
                 Tier 3 Accounts (0-100): {accountParams.tier3}
               </label>
               <input
                 type="range"
-                id="tier3"
                 min="0"
                 max="100"
                 value={accountParams.tier3}
@@ -158,21 +154,19 @@ const ModelDashboard = () => {
                   ...accountParams,
                   tier3: parseInt(e.target.value)
                 })}
-                className="w-full accent-[#E35F00]"
+                style={{ width: '100%', accentColor: '#E35F00' }}
               />
             </div>
           </div>
         </div>
-
-        {/* Right Column - Chart */}
-        <div className="flex-1">
-          <Suspense fallback={<div className="h-[600px] w-full flex items-center justify-center text-white">Loading chart...</div>}>
+        <div style={{ flex: 1 }}>
+          <Suspense fallback={<div style={{ height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading chart...</div>}>
             <Chart data={calculateMetrics()} formatCurrency={formatCurrency} />
           </Suspense>
         </div>
       </div>
     </div>
-);
+  );
 };
 
 export default ModelDashboard;
