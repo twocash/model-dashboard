@@ -101,14 +101,14 @@ const ModelDashboard = () => {
     return `$${value.toLocaleString()}`;
   };
 
-  return (
-    <div className="w-full bg-black text-white p-8">
-      <h1 className="text-2xl font-bold mb-8">
+   return (
+    <div className="flex flex-col w-full max-w-[2000px] mx-auto bg-black text-white">
+      <h1 className="text-2xl font-bold p-8">
         BHN Revenue Share: {formatCurrency(calculateMetrics().reduce((sum, item) => sum + item.bhnShare, 0))}
       </h1>
-      <div className="grid grid-cols-12 gap-8">
+      <div className="flex flex-row px-8">
         {/* Left Column - Sliders */}
-        <div className="col-span-4 space-y-8">
+        <div className="w-1/3 pr-12 flex flex-col space-y-8">
           <div>
             <label htmlFor="tier1" className="block text-sm font-medium mb-1">
               Tier 1 Accounts (0-10): {accountParams.tier1}
@@ -163,14 +163,14 @@ const ModelDashboard = () => {
         </div>
 
         {/* Right Column - Chart */}
-        <div className="col-span-8">
-          <Suspense fallback={<div className="h-[500px] w-full flex items-center justify-center">Loading chart...</div>}>
+        <div className="w-2/3">
+          <Suspense fallback={<div className="h-[600px] w-full flex items-center justify-center">Loading chart...</div>}>
             <Chart data={calculateMetrics()} formatCurrency={formatCurrency} />
           </Suspense>
         </div>
       </div>
     </div>
-  );
+ );
 };
 
 export default ModelDashboard;
